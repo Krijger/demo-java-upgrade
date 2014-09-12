@@ -1,4 +1,4 @@
-FROM quintenk/jdk7-oracle
+FROM quintenk/jdk8-oracle
 
 ADD target/demoapp-1.0-SNAPSHOT.jar /root/demoapp-1.0-SNAPSHOT.jar
 
