@@ -4,4 +4,6 @@ mvn clean install
 
 docker build -t demoapp .
 
-docker run -p 8080:8080 -it demoapp
+docker kill demoapp
+docker rm demoapp
+docker run --name demoapp -p 8000:8080 -d demoapp
