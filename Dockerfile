@@ -2,6 +2,6 @@ FROM quintenk/jdk7-oracle
 
 ADD target/demoapp-1.0-SNAPSHOT.jar /root/demoapp-1.0-SNAPSHOT.jar
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD java -jar /root/demoapp-1.0-SNAPSHOT.jar
