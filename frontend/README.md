@@ -1,3 +1,9 @@
+What is this
+============
+This is application, that allows updating Dockerfile from browser, displaying container "homepage" with Java version number
+and displaying logs from the host.
+
+WIP.
 
 Run the app
 ===========
