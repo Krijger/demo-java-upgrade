@@ -19,3 +19,5 @@ local/
 .DS_store
 */.DS_store
 
+# Vagrant #
+.vagrant/
