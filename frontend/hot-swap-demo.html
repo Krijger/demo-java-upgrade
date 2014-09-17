@@ -1,0 +1,59 @@
+<head>
+  <title>Demo</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Docker Java hot swap demonstration</h2>
+                <p class="lead">
+                    Update the Java version in the Dockerfile to see how easy and quick it is to switch JDK with Docker!
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{> wysiwyg}}
+            </div>
+            <div class="col-md-6">
+                {{> guest}}
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                {{> logs}}
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<template name="wysiwyg">
+    <h4>Dockerfile</h4>
+    <div class="form-group">
+        <textarea id="dockerfile" class="form-control" rows="10">{{dockerfile}}</textarea>
+    </div>
+    <button type="button" class="btn btn-primary">Update Dockerfile!</button>
+</template>
+
+<template name="logs">
+    <h4>Logs</h4>
+    <ul id="logs">
+    {{#each entries}}
+        <li><small>{{entry}}</small></li>
+    {{/each}}
+    </ul>
+</template>
+
+<template name="guest">
+    <h4>Guest system</h4>
+    <div id="homepage">
+        {{{homepage}}}
+    </div>
+    <p>
+        <button type="button" class="btn btn-primary">Reload the container homepage!</button>
+    </p>
+</template>

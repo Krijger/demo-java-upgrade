@@ -1,0 +1,19 @@
+/* CSS declarations go here */
+#logs {
+    border: 1px solid #000;
+    margin: 1em 0;
+    padding: 1em;
+    overflow: scroll;
+    max-height: 500px;
+    list-style-position: inside;
+}
+
+#logs li {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#homepage {
+    border: 1px solid #000;
+    margin: 1em 0;
+    padding: 1em;
+}
