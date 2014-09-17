@@ -6,6 +6,10 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
+  config.vm.provider "virtualbox" do |v|
+     v.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "ubuntu/trusty64"
 
@@ -18,11 +22,11 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
 
   # HTTP
-  # config.vm.network :forwarded_port, guest: 80, host: 4050
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network :private_network, ip: "192.168.33.50"
+  # config.vm.network :private_network, ip: "192.168.33.50"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -36,6 +40,18 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
 
   config.vm.provision :docker do |d|
-    config.vm.synced_folder ".", "/vagrant", :nfs => true
+    # config.vm.synced_folder ".", "/vagrant", :nfs => true
   end
+
+$script = <<SCRIPT
+# apt-get -y install default-jdk maven
+apt-get -y install mongodb
+curl https://install.meteor.com | /bin/sh
+# hack to make mongo work with nfs
+rm -rf /vagrant/frontend/.meteor/local/db && mkdir -p /vagrant/frontend/.meteor/local && cd /vagrant/frontend/.meteor/local && mkdir /home/vagrant/db && ln -s /home/vagrant/db/
+chown vagrant:vagrant /home/vagrant/db
+SCRIPT
+
+  config.vm.provision "shell", inline: $script
+
 end
