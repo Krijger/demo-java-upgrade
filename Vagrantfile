@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   end
 
 $script = <<SCRIPT
-# apt-get -y install default-jdk maven
+apt-get -y install default-jdk maven
 apt-get -y install mongodb
 curl https://install.meteor.com | /bin/sh
 # hack to make mongo work with nfs
