@@ -39,6 +39,11 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+  # Raspberry cache proxy
+  # config.proxy.http     = "http://192.168.0.17:3128"
+  # config.proxy.https    = "http://192.168.0.17:3128"
+  # config.proxy.no_proxy = "localhost,127.0.0.1"
+
   config.vm.provision :docker do |d|
     # config.vm.synced_folder ".", "/vagrant", :nfs => true
   end
@@ -50,6 +55,9 @@ curl https://install.meteor.com | /bin/sh
 # hack to make mongo work with nfs
 rm -rf /vagrant/frontend/.meteor/local/db && mkdir -p /vagrant/frontend/.meteor/local && cd /vagrant/frontend/.meteor/local && mkdir /home/vagrant/db && ln -s /home/vagrant/db/
 chown vagrant:vagrant /home/vagrant/db
+export LANGUAGE="en_US.UTF-8"
+echo 'LANGUAGE="en_US.UTF-8"' >> /etc/default/locale
+echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
 SCRIPT
 
   config.vm.provision "shell", inline: $script
