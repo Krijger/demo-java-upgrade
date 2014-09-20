@@ -1,6 +1,6 @@
 
 ContainerName = 'demoapp';
-ContainerURL = 'http://127.0.0.1/';
+ContainerURL = 'http://127.0.0.1:8000/';
 DockerfilePath = '/vagrant/Dockerfile';
 Logs = new Mongo.Collection("logs");
 
@@ -26,13 +26,17 @@ if (Meteor.isClient) {
     });
 
     // Guest
+    var setHomepage = function() {
+        Meteor.call('getContainerHomepage', function(error, result) {
+            Session.set('homepage', result);
+        });
+    }
     Template.guest.events({
         'click button': function() {
-            Meteor.call('getContainerHomepage', function(error, result) {
-                Session.set('homepage', result);
-            });
+            setHomepage();
         }
     });
+    setHomepage();
     Template.guest.homepage = function() {
         return Session.get('homepage');
     }

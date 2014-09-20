@@ -20,6 +20,4 @@ Run the app
 
 Todo
 ====
-- IP of the container should be fixed and configured as part of hot-swap-demo.js ContainerURL.
-- Container ID needs to be determined and used in hot-swap-demo.js ContainerID.
 - Run ./build.sh after Dockerfile is updated
