@@ -8,20 +8,8 @@
   </head>
   <body>
     <div class="container">
-      <div class="navbar">
-        <div class="navbar-inner">
-          <a class="brand"
-              href="https://github.com/ultraq/thymeleaf-layout-dialect">
-              Demo Java Upgrade
-          </a>
-        </div>
-      </div>
-      <h1 layout:fragment="header">Java version</h1>
-        <div>
-            <ul>
-                <li th:text="${javaVersion}">Java version</li>
-            </ul>
-        </div>
+      <h1 layout:fragment="header">Java Docker container</h1>
+        <p th:text="${javaVersion}">Java version</p>
     </div>
   </body>
 </html>

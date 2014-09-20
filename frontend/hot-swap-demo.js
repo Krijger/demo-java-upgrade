@@ -1,7 +1,8 @@
 
+BasePath = '/vagrant';
 ContainerName = 'demoapp';
 ContainerURL = 'http://127.0.0.1:8000/';
-DockerfilePath = '/vagrant/Dockerfile';
+DockerfilePath = BasePath + '/Dockerfile';
 Logs = new Mongo.Collection("logs");
 
 if (Meteor.isClient) {
@@ -44,11 +45,18 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     var fs = Npm.require('fs');
+    var process = Npm.require('child_process');
     var spawn = Npm.require('child_process').spawn;
-
     Meteor.methods({
         updateDockerfile: function(content) {
             fs.writeFile(DockerfilePath, content);
+            process.exec('cd ' + BasePath + ' && ./build.sh', function (error, stdout, stderr) {
+                if (error) {
+                    console.log(error.stack);
+                    console.log('Error code: '+error.code);
+                    console.log('Signal received: '+error.signal);
+                }
+            });
         },
         readDockerfile: function() {
             return fs.readFileSync(DockerfilePath, 'utf-8');
