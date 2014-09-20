@@ -1,5 +1,5 @@
 
-ContainerID = '80b7edf6edf6';
+ContainerName = 'demoapp';
 ContainerURL = 'http://127.0.0.1/';
 DockerfilePath = '/vagrant/Dockerfile';
 Logs = new Mongo.Collection("logs");
@@ -56,13 +56,23 @@ if (Meteor.isServer) {
     });
 
     Meteor.startup(function() {
-        var tail = spawn('docker', ['logs', '-f', ContainerID]);
-        tail.stdout.setEncoding('utf8');
-        tail.stdout.on('data', Meteor.bindEnvironment(function(data) {
+        Logs.remove({});
+        var addEntry = function(data) {
             data.split(/\r?\n/).forEach(function(entry) {
                 entry && Logs.insert({entry: entry});
             });
-        }));
+        };
+        var tailDockerLogs = function() {
+            var tail = spawn('docker', ['logs', '-f', ContainerName]);
+            tail.stdout.setEncoding('utf8');
+            tail.stdout.on('data', Meteor.bindEnvironment(addEntry));
+            tail.stdout.on('end', Meteor.bindEnvironment(function() {
+                setTimeout(Meteor.bindEnvironment(function() {
+                    tailDockerLogs();
+                }), 300);
+            }));
+        }
+        tailDockerLogs();
     });
     Meteor.publish('logs', function() {
         return Logs.find({});
