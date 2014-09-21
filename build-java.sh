@@ -1,9 +1,9 @@
 #!/bin/sh
 
 cd java7
-docker build -t quintenk/jdk7-oracle .
+docker build -t quintenk/jdk-oracle:7 .
 cd ..
 
 cd java8
-docker build -t quintenk/jdk8-oracle .
+docker build -t quintenk/jdk-oracle:8 .
 cd ..
