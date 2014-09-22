@@ -50,7 +50,7 @@ if (Meteor.isServer) {
     Meteor.methods({
         updateDockerfile: function(content) {
             fs.writeFile(DockerfilePath, content);
-            process.exec('cd ' + BasePath + ' && ./build.sh', function (error, stdout, stderr) {
+            process.exec('cd ' + BasePath + ' && ./build.sh', {maxBuffer: 1024 * 500}, function (error, stdout, stderr) {
                 if (error) {
                     console.log(error.stack);
                     console.log('Error code: '+error.code);
