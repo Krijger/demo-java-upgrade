@@ -53,9 +53,8 @@ $script = <<SCRIPT
 apt-get -y install default-jdk maven
 apt-get -y install mongodb
 curl https://install.meteor.com | /bin/sh
-# hack to make mongo work with nfs
-rm -rf /vagrant/frontend/.meteor/local/db && mkdir -p /vagrant/frontend/.meteor/local && cd /vagrant/frontend/.meteor/local && mkdir /home/vagrant/db && ln -s /home/vagrant/db/
-chown vagrant:vagrant /home/vagrant/db
+rm -rf /vagrant/frontend/.meteor/local && mkdir -p /home/vagrant/.meteorlocal && ln -s /home/vagrant/.meteorlocal /vagrant/frontend/.meteor/local
+chown -R vagrant:vagrant /home/vagrant/.meteor
 export LANGUAGE="en_US.UTF-8"
 echo 'LANGUAGE="en_US.UTF-8"' >> /etc/default/locale
 echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
