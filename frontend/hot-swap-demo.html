@@ -45,11 +45,13 @@
 </template>
 
 <template name="logs">
-    <ul id="logs">
-    {{#each entries}}
-        <li><small>{{entry}}</small></li>
-    {{/each}}
-    </ul>
+    <div class="logs-wrapper">
+        <ul id="logs">
+            {{#each entries}}
+            <li><small>{{entry}}</small></li>
+            {{/each}}
+        </ul>
+    </div>
 </template>
 
 <template name="guest">
