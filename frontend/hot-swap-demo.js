@@ -17,9 +17,16 @@ if (Meteor.isClient) {
             $('button').addClass('disabled');
         }
     });
-    
+
     // Logs
-    Meteor.subscribe('logs');
+    Meteor.subscribe('logs', function() {
+        Logs.find({}).observeChanges({
+            added: function() {
+                var element = $('#logs-wrapper');
+                element.scrollTop(element.prop("scrollHeight"));
+            }
+        });
+    });
     Template.logs.entries = function() {
         return Logs.find({});
     };

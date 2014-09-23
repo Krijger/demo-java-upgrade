@@ -1,6 +1,5 @@
 /* CSS declarations go here */
-.logs-wrapper {
-    position: relative;
+#logs-wrapper {
     border: 1px solid #000;
     margin: 1em 0;
     padding: 1em;
@@ -9,13 +8,12 @@
     background-color: #333333;
 }
 
-#logs {
-    position: relative;
+#logs-list {
     list-style-type: none;
     color: #e6e6e6;
 }
 
-#logs li {
+#logs-list li {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
