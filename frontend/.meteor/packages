@@ -10,3 +10,5 @@ insecure
 meteorhacks:npm
 #npm-container
 http
+jquery
+anti:methods
